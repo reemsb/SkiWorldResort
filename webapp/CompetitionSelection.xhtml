@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml"> 
+
+<ui:define name="content">
+<h1>List of Available Competitions to apply:</h1>
+<br></br>
+<h:form>
+<p:carousel value="#{applicationManagementBean.allCompetitions}" headerText="The competitions" var="competition" itemStyle="text-align:center" responsive="true">
+        <p:panelGrid columns="3" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+          
+            <f:facet name="header">
+ <h:outputText value=" Type :" />
+  <h:outputText value="#{competition.type}" style="color:#FF0000"/>
+           </f:facet>
+           
+            
+         
+            <h:outputText value="the starting date:" />
+            <h:outputText value="#{competition.startingHour.time}" />
+ <br></br>  
+            <h:outputText value="the finishing date:" />
+            <h:outputText value="#{competition.finishingHour.time}" />
+ <br></br>  
+            <h:outputText value="the Ski Station " />
+            <h:outputText value="#{competition.station.label}" />
+     <br></br>         
+            <h:outputText value="nombre of availble places " />
+            <h:outputText value="#{competition.capacity}" />
+            
+         
+           <br></br>
+           
+                <h:form>
+                    <h:commandButton actionListener="#{applicationManagementBean.doAddapplication(competition)}"
+						value="Apply here" >
+						<f:setPropertyActionListener value="#{competition}"
+							target="#{applicationManagementBean.competitionSelected}">
+							</f:setPropertyActionListener>							
+						</h:commandButton>
+						 
+   
+						</h:form>
+
+        </p:panelGrid>
+ 
+        <f:facet name="footer">
+                In this SkiStation, there are #{(applicationManagementBean.allCompetitions.size())} skiing Competition(s).
+        </f:facet>
+    </p:carousel>
+    </h:form>
+</ui:define>
+</ui:composition>
