@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      template="/template/template.xhtml"> 
+
+<ui:define name="content">
+<br></br>
+<h1>Fill in the report to complain: </h1>
+			<h:panelGrid columns="2" style="background-color: #003399">
+
+        <p:outputLabel for="dateReclamation" value="Date of the issue:" />
+        <p:calendar id="dateReclamation" value="#{complaintManagementBean.complaint.complaintID.dateOfComplaint}" pages="3" mindate="5/2/2017"/>
+
+        <p:outputLabel for="station" value="the troubling station: " />
+        <p:selectOneMenu id="station" value="#{complaintManagementBean.complaint.station}" converter="sc">
+            <f:selectItem itemLabel="please select station"  />
+            <f:selectItems value="#{stationBean.stations}" var="s" itemLabel="#{s.label}" itemValue="#{s}"/>
+        </p:selectOneMenu>
+     <br></br>
+     <br></br>   
+        
+     <p:outputLabel for="topic" value="the topic of the issue: " />
+     <p:editor id="topic" widgetVar="editorWidget" value="#{complaintManagementBean.complaint.topic}" width="600" />
+     <br></br>
+     
+    
+<h:form>	
+		<p:commandButton actionListener="#{complaintManagementBean.doAddComplaint()}" value="Send complaint" action="/ComplaintAffbyclient?faces-redirect=true"/>
+</h:form>   
+</h:panelGrid>          
+</ui:define>
+</ui:composition>
+
+

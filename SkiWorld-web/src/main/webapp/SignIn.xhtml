@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml"> 
+
+
+<ui:define name="content">
+<h1 style="font-size:50px;">Sign In page</h1>
+		<h:form>
+			<h:panelGrid columns="2" style="background-color: #003399">
+				<h:outputText value="email" style="font-size:30px;color:white;"/>
+				<h:inputText value="#{identity.user.email}" />
+				<h:outputText value="password" style="font-size:30px;color:white;"/>
+				<h:inputSecret value="#{identity.user.password}" />
+			</h:panelGrid>
+			<h:commandButton action="#{identity.doLogin()}" value="Sign In" />
+		</h:form>
+
+</ui:define>
+</ui:composition>

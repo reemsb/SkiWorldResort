@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      template="/template/template.xhtml"> 
+
+<ui:define name="content">
+<h1>List of your previous complaints:</h1>
+<br></br>
+<h:form>
+<p:carousel value="#{complaintManagementBean.complaintsbyclient}" headerText="My complaints" var="complaint" itemStyle="text-align:center" responsive="true">
+       <form action="">
+        <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+          
+            <f:facet name="header">
+ <h:outputText value="the status:" />
+            <h:outputText value="#{complaint.status}" style="color:#FF0000"/>
+            </f:facet>
+            <h:outputText value="Date of the complaint:" />
+            <h:outputText value="#{complaint.complaintID.dateOfComplaint}" />
+ 
+            <h:outputText value="the troubling station" />
+            <h:outputText value="#{complaint.station.label}" />
+             <h:outputText value="the Lattitude " />
+             <h:outputText value="#{complaint.station.latitude}" />
+              <h:outputText value="the Longitude " />
+             <h:outputText value="#{complaint.station.longitude}" />
+ 
+            <h:outputText value="the topic " />
+            <h:outputText value="#{complaint.topic}" />
+         
+           <br></br>
+           <h:form>
+                    <h:commandButton actionListener="#{complaintManagementBean.doDeleteComplaint(complaint)}" value="cancel this complaint" style="font-size:120%;color:#FF0000" >
+						<f:setPropertyActionListener value="#{complaint}"
+							target="#{complaintManagementBean.complaintSelected}">
+							</f:setPropertyActionListener>
+						</h:commandButton>
+					
+           </h:form>
+        </p:panelGrid>
+ </form>
+        <f:facet name="footer">
+                 there are #{(complaintManagementBean.complaintsbyclient.size())} Complaints made by you.
+        </f:facet>
+    </p:carousel>
+    </h:form>
+
+</ui:define>
+</ui:composition>
